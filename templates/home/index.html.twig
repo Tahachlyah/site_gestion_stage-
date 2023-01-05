@@ -4,23 +4,6 @@
 {% endblock %}
 
 {% block body %}
-	{% if app.user and app.user.completeData == false %}
-
-		<h1>completez vos données</h1>
-		{% if app.user.function == "internship_supervisor" %}
-			<h1>you are a supervisor</h1>
-			{% include "my_account/includes/_internship_supervisor.html.twig" %}
-		{% endif %}
-		{% if app.user.function == "intern" %}
-			<h1>
-				you are an intern</h1>
-			{% include "my_account/includes/_intern.html.twig" %}
-		{% endif %}
-		{% if app.user.function == "sponsor" %}
-			<h1>
-				you are a sponsor</h1>
-			{% include "my_account/includes/_sponsor.html.twig" %}
-		{% endif %}
-
-	{% endif %}
+{# l'inscription se fait en deux étapes la première se deroule dans  #}
+	
 {% endblock %}

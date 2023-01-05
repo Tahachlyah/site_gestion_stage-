@@ -1,1 +1,4 @@
 je suis dans intern.html.twig
+{% if app.user and app.user.completeData == false  %}
+<a href="{{path("app_intern_new")}}">completer les données</a>
+{% endif %}

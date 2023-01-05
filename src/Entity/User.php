@@ -57,6 +57,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?InternshipSupervisor $internshipSupervisor = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Intern $intern = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -250,6 +256,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getInternshipSupervisor(): ?InternshipSupervisor
+    {
+        return $this->internshipSupervisor;
+    }
+
+    public function setInternshipSupervisor(InternshipSupervisor $internshipSupervisor): self
+    {
+        // set the owning side of the relation if necessary
+        if ($internshipSupervisor->getUser() !== $this) {
+            $internshipSupervisor->setUser($this);
+        }
+
+        $this->internshipSupervisor = $internshipSupervisor;
+
+        return $this;
+    }
+
+    public function getIntern(): ?Intern
+    {
+        return $this->intern;
+    }
+
+    public function setIntern(Intern $intern): self
+    {
+        // set the owning side of the relation if necessary
+        if ($intern->getUser() !== $this) {
+            $intern->setUser($this);
+        }
+
+        $this->intern = $intern;
 
         return $this;
     }
